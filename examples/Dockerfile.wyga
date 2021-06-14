@@ -1,0 +1,25 @@
+ARG V=7.4.20
+FROM wyga/php-ext-igbinary:${V} AS igbinary
+FROM wyga/php-ext-yaml:${V} AS yaml
+FROM wyga/php-ext-imagick:${V} AS imagick
+FROM wyga/php-ext-exif:${V} AS exif
+FROM wyga/php-ext-pdo_mysql:${V} AS pdo_mysql
+FROM wyga/php-ext-mysqli:${V} AS mysqli
+FROM wyga/php-ext-gd:${V} AS gd
+FROM wyga/php-ext-mcrypt:${V} AS mcrypt
+FROM wyga/php-ext-intl:${V} AS intl
+
+FROM scratch AS build
+COPY --from=igbinary / /
+COPY --from=yaml / /
+COPY --from=imagick / /
+COPY --from=exif / /
+COPY --from=pdo_mysql / /
+COPY --from=mysqli / /
+COPY --from=gd / /
+COPY --from=mcrypt / /
+COPY --from=intl / /
+
+FROM wyga/php:${V}-fpm
+COPY --from=build / /
+RUN wyga-php-setup
