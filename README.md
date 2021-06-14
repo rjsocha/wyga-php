@@ -6,7 +6,8 @@
 
 ```
 FROM php:7.4.20-fpm-buster
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
+ /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
   install-php-extensions \
         igbinary \
@@ -22,10 +23,11 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
 
 try:
 ```
-docker build --no-cache -t wyga-php-7.4-fpm:build -f Dockerfile.build "https://github.com/rjsocha/wyga-php.git#master:examples"
+docker build --no-cache -t wyga-php-7.4-fpm:build \
+ -f Dockerfile.build "https://github.com/rjsocha/wyga-php.git#master:examples"
 ```
 
-Build time: 3m 4 s)\
+Build time: 3m 4s\
 Image size: 467MB
 
 ### wyga build (without cache, wyga/php):
@@ -60,7 +62,8 @@ RUN wyga-php-setup
 
 try:
 ```
-docker build --no-cache -t wyga-php-7.4-fpm:wyga -f Dockerfile.wyga "https://github.com/rjsocha/wyga-php.git#master:examples"
+docker build --no-cache -t wyga-php-7.4-fpm:wyga \
+ -f Dockerfile.wyga "https://github.com/rjsocha/wyga-php.git#master:examples"
 ```
 
 Build time: 0m 50s\
