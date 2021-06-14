@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+_ext=$(php-config --extension-dir)
+_exclude_libs="^(libbsd0|libc6|libgcc1|libstdc\+\+6)$"
+_exclude_so="opcache|sodium"
+_base=$1
+if [[ -z ${_base} ]]
+then
+	        echo "usage: $0 <module>"
+		        exit 1
+fi
+_so="${_ext}/${_base}.so"
+if [[ ! -f ${_so} ]]
+then
+	        echo "Unable to locate module ${_base}"
+		        exit 1
+fi
+
+mkdir -p "/dist${_ext}"
+
+echo cp "${_so}" "/dist${_ext}/"
+cp "${_so}" "/dist/${_ext}/"
+
+mkdir -p "/dist/wyga/php/ext/${_base}"
+if ldd "${_so}"  | fgrep '=>' | awk '{print $3}' | xargs -l1 dpkg -S | awk -F: '{print $1}' | sort | uniq | egrep -v "${_exclude_libs}"
+then
+	ldd "${_so}"  | fgrep '=>' | awk '{print $3}' | xargs -l1 dpkg -S | awk -F: '{print $1}' | sort | uniq | egrep -v "${_exclude_libs}" >"/dist/wyga/php/ext/${_base}/module.dep"
+fi
+exit 0
+

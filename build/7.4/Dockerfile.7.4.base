@@ -1,0 +1,38 @@
+ARG PHP_VERSION
+FROM php:${PHP_VERSION}-fpm-buster AS base
+RUN apt-get purge -y \
+ patch \
+ dpkg-dev \
+ pkg-config \
+ linux-libc-dev \
+ g++  \
+ g++-8 \
+ libc6-dev \
+ libstdc++-8-dev \
+ autoconf \
+ cpp \
+ cpp-8 \
+ gcc \
+ re2c \
+ libc-dev-bin \
+ xz-utils \
+ perl \
+ libdpkg-perl \
+ libdpkg-perl \
+ libperl5.28 \
+ perl \
+ perl-modules-5.28
+
+RUN  rm -rf /usr/local/bin/phpdbg /usr/src/* /usr/local/include/*
+ 
+FROM scratch
+ARG PHP_VERSION
+COPY --from=base / /
+ENV PHP_INI_DIR=/usr/local/etc/php
+ENV PHP_VERSION=${PHP_VERSION}
+ENTRYPOINT ["docker-php-entrypoint"]
+WORKDIR /var/www/html
+STOPSIGNAL SIGQUIT
+
+EXPOSE 9000
+CMD ["php-fpm"]

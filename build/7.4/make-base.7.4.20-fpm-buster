@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+REGISTRY="wyga/php"
+VERSION="7.4.20"
+BASE="${VERSION}-fpm-buster"
+TAG_AS="7.4-fpm-buster 7-fpm-buster ${VERSION}-fpm 7.4-fpm 7-fpm"
+
+echo "Build: ${REGISTRY}:${BASE}"
+docker build -q -t "${REGISTRY}:${BASE}" --build-arg PHP_VERSION=${VERSION} -f Dockerfile.7.4.base ../context/empty/
+
+for _tag in ${TAG_AS}
+do
+	echo "TAG as ${REGISTRY}:${_tag}"
+	docker tag "${REGISTRY}:${BASE}" ${REGISTRY}:${_tag}
+done

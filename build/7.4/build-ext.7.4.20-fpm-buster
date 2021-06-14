@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+REGISTRY="php-build-ext"
+VERSION="7.4.20"
+BASE="${VERSION}-fpm-buster"
+
+echo "Build: ${REGISTRY}:${BASE}"
+time docker build -t "${REGISTRY}:${BASE}" --build-arg PHP_VERSION=${VERSION} -f Dockerfile.7.4.ext ../context/ext/build/

@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+VERSION="7.4.20"
+
+REGISTRY="wyga/php"
+BASE="${VERSION}-fpm-buster"
+PUBLISH="$BASE 7.4-fpm-buster 7-fpm-buster ${VERSION}-fpm 7.4-fpm 7-fpm"
+
+for _tag in ${PUBLISH}
+do
+	docker push "${REGISTRY}:${_tag}"
+done
+
+BASE="${VERSION}-buster"
+PUBLISH="$BASE 7.4-buster 7-buster ${VERSION} 7.4 7"
+
+for _mod in intl imap xmlrpc snmp exif gettext gd gmp mcrypt shmop dba pdo_mysql sockets uuid soap xsl ldap igbinary bcmath calendar xdebug gmagick mysqli redis sysvshm pcntl mongodb zip sysvmsg bz2 sysvsem memcached memcache yaml imagick
+do
+	REGISTRY="wyga/php-ext-${_mod}"
+	for _tag in ${PUBLISH}
+	do
+		docker push "${REGISTRY}:${_tag}"
+	done
+done

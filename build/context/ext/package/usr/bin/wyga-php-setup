@@ -1,0 +1,57 @@
+#!/bin/bash
+set -e
+WYGA="/wyga/php/ext"
+
+no_activation=0
+if [[ "$1" == "--no-activation" ]]
+then
+  no_activation=1
+fi
+
+_list_deps() {
+  for _ext in $(find "${WYGA}" -mindepth 1 -maxdepth 1 -type d)
+  do
+    if [[ -s "${_ext}/module.dep" ]]
+    then
+      cat "${_ext}/module.dep"
+    fi
+  done | sort | uniq | tr '\n' ' '
+}
+
+_list_ext() {
+  for _ext in $(find "${WYGA}" -mindepth 1 -maxdepth 1 -type d)
+  do
+    _mod=$(basename "${_ext}")
+    echo -n "${_mod} "
+  done
+}
+
+if [[ -d ${WYGA} ]]
+then
+  # install deps
+  _deps=$(_list_deps)
+  if [[ -n ${_deps} ]]
+  then
+    echo "deps: ${_deps}"
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update &>/dev/null
+    apt-get install --no-install-recommends -qq ${_deps} -qq &>/dev/null
+    apt-get clean all
+    find /var/lib/apt -type f -delete
+  else
+    echo "no deps: OK"
+  fi
+  if [[ $no_activation -eq 0 ]]
+  then
+    # activate modules
+    _ext=$(_list_ext)
+    if [[ -n ${_ext} ]]
+    then
+      echo "extensions: ${_ext}"
+      docker-php-ext-enable ${_ext}
+    else
+      echo "no extensions: OK"
+    fi
+  fi
+fi
+exit

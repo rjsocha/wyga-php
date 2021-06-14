@@ -1,0 +1,11 @@
+#!/bin/bash
+_ext=$(php-config --extension-dir)
+_exclude_libs="^(libbsd0|libc6|libgcc1)$"
+_exclude_so="opcache|sodium"
+for _m in $(find ${_ext} -type f -name "*.so")
+do
+	_mod=$(basename "${_m}")
+	_base=$(basename "${_mod}" ".so")
+	[[ $base =~ ^(${_exclude_so})$ ]] && continue
+	echo "${_base}"
+done
