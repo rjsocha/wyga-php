@@ -9,7 +9,9 @@ fi
 
 echo "## Base image"
 echo " * \`${REGISTRY}\`"
-echo -n "   *"
+
+echo "### Tags"
+echo -n " *"
 for _tag in ${BASE_TAG_AS}
 do
 	echo -n " \`${_tag}\`"
@@ -17,15 +19,18 @@ done
 echo -ne "\n\n"
 
 echo "## Availible extenstions"
+echo -ne "\n"
+echo "### Images"
 for _mod in $(echo -e ${EXTENSIONS// /\\n} | sort)
 do
 	EREGISTRY="${REGISTRY}-ext-${_mod}"
 	echo " * \`${EREGISTRY}\`"
-      	#echo -n "   *  \`${BASE}\`"
-      	echo -n "   *"
-	for _tag in ${EXTENSION_TAG_AS}
-	do
-		echo -n " \`${_tag}\`"
-	done
-	echo -ne "\n"
 done
+
+echo "### Tags"
+echo -n " *"
+for _tag in ${EXTENSION_TAG_AS}
+do
+	echo -n " \`${_tag}\`"
+done
+echo -ne "\n"
