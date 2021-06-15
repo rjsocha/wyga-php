@@ -5,5 +5,5 @@ all:
 publish:
 	./build publish
 
-show:
-	./build show
+md:
+	./build md

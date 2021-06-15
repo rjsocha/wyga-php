@@ -1,90 +1,94 @@
 # PoC/alpha stage wyga PHP modular system (binary distribution)
 
-## Supported extensions
+## Base image
+ * `wyga/php`
+   * `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20-cli` `7.4-cli` `7-cli` `7.4.20` `7.4` `7`
 
- * `wyga/php` TAGS: `7.4.20-fpm-buster` `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20-cli` `7.4-cli` `7.4.20` `7.4` `7` * `wyga/php-ext-bcmath`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-bz2`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-calendar`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-dba`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-exif`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-gd`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-gearman`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-gettext`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-gmagick`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-gmp`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-igbinary`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-imagick`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-imap`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-intl`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-ldap`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-mailparse`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-mcrypt`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-memcache`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-memcached`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-mongodb`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-mysqli`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-odbc`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-pcntl`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-pdo_mysql`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-pdo_odbc`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-pdo_pgsql`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-pgsql`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-pspell`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-redis`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-shmop`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-snmp`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-soap`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-sockets`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-sysvmsg`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-sysvsem`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-sysvshm`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-uuid`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-xdebug`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-xmlrpc`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-xsl`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-yaml`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
-
- * `wyga/php-ext-zip`  TAGS: `7.4.20-fpm-buster` `7.4.20` `7.4` `7`
+## Availible extenstions
+ * `wyga/php-ext-bcmath`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-bz2`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-calendar`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-dba`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-exif`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-gd`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-gearman`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-gettext`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-gmagick`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-gmp`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-igbinary`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-imagick`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-imap`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-intl`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-ldap`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-mailparse`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-mcrypt`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-memcache`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-memcached`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-mongodb`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-mysqli`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-odbc`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-pcntl`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-pdo_mysql`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-pdo_odbc`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-pdo_pgsql`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-pgsql`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-pspell`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-redis`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-shmop`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-snmp`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-soap`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-sockets`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-sysvmsg`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-sysvsem`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-sysvshm`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-uuid`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-xdebug`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-xmlrpc`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-xsl`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-yaml`
+   * `7.4.20` `7.4` `7`
+ * `wyga/php-ext-zip`
+   * `7.4.20` `7.4` `7`
 
 ## By example:
 

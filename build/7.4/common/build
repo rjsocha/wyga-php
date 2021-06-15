@@ -38,12 +38,12 @@ cmd="${1:-none}"
 echo "Action: $cmd"
 
 case "$cmd" in
-	show)
+	md)
 		if [[ -x ./show ]]
 		then
-			./show
+			./show-md
 		else
-			../show
+			../show-md
 		fi
 		;;
 	base)

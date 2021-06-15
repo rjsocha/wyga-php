@@ -7,19 +7,25 @@ then
 	exit 1
 fi
 
-echo -n " * \`${REGISTRY}\` TAGS: \`${BASE}\`"
+echo "## Base image"
+echo " * \`${REGISTRY}\`"
+echo -n "   *"
 for _tag in ${BASE_TAG_AS}
 do
-	echo  -n " \`${_tag}\`"
+	echo -n " \`${_tag}\`"
 done
+echo -ne "\n\n"
 
+echo "## Availible extenstions"
 for _mod in $(echo -e ${EXTENSIONS// /\\n} | sort)
 do
 	EREGISTRY="${REGISTRY}-ext-${_mod}"
-	echo -n " * \`${EREGISTRY}\`  TAGS: \`${BASE}\`"
+	echo " * \`${EREGISTRY}\`"
+      	#echo -n "   *  \`${BASE}\`"
+      	echo -n "   *"
 	for _tag in ${EXTENSION_TAG_AS}
 	do
 		echo -n " \`${_tag}\`"
 	done
-	echo -e "\n"
+	echo -ne "\n"
 done
