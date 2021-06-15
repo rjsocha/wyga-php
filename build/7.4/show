@@ -1,0 +1,25 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+
+echo -n " * \`${REGISTRY}\` TAGS: \`${BASE}\`"
+for _tag in ${BASE_TAG_AS}
+do
+	echo  -n " \`${_tag}\`"
+done
+
+for _mod in $(echo -e ${EXTENSIONS// /\\n} | sort)
+do
+	EREGISTRY="${REGISTRY}-ext-${_mod}"
+	echo -n " * \`${EREGISTRY}\`  TAGS: \`${BASE}\`"
+	for _tag in ${EXTENSION_TAG_AS}
+	do
+		echo -n " \`${_tag}\`"
+	done
+	echo -e "\n"
+done

@@ -9,13 +9,17 @@
 
 #define ARG_DEP_LONG "--dependencies"
 #define ARG_DEP "-d"
+#define ARG_QUIET_LONG "--quiet"
+#define ARG_QUIET "-q"
+#define ARG_INFO_LONG "--info"
+#define ARG_INFO "-i"
 
 #define WYGA "/wyga/php/ext"
 #define MODULE "/module.dep"
 #define VERSION "/version"
 
 /*
-* Wyswietla plik w jeden link (chomp(nl))
+* Wyswietla plik w jeden lini (chomp(nl))
 */
 int showfile(char *file,char *prefix,char *suffix) {
     FILE *fp;
@@ -72,22 +76,32 @@ int find_first_dir(char *path,char *ext, int n) {
 }
 int main(int ac, char **av) {
 int a_deps = 0;
+int f_quiet = 0;
+int info = 0;
 char ext[128];
 char fn[256];
     if(ac>1) {
-            if(strcmp(av[1], ARG_DEP_LONG) == 0) a_deps=1;
-            if(strcmp(av[1], ARG_DEP) == 0) a_deps=1;
+        for(int i=1;i<ac;i++) {
+            if(strcmp(av[i], ARG_DEP_LONG) == 0) a_deps=1;
+            if(strcmp(av[i], ARG_DEP) == 0) a_deps=1;
+            if(strcmp(av[i], ARG_QUIET_LONG) == 0) f_quiet=1;
+            if(strcmp(av[i], ARG_QUIET) == 0) f_quiet=1;
+            if(strcmp(av[i], ARG_INFO_LONG) == 0) info=1;
+            if(strcmp(av[i], ARG_INFO) == 0) info=1;
+        }
     }
-    if(find_first_dir(WYGA,ext,sizeof ext) == 0) {
+    if(info && find_first_dir(WYGA,ext,sizeof ext) == 0) {
         printf("ext: %s\n",ext);
         snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,VERSION);
         showfile(fn,"version: ","\n");
         if(a_deps) {
             snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,MODULE);
             showfile(fn,"deps: ","\n");
-        }
+	}
     }
-    fprintf(stderr,"This is intermeditate image for wyga/php. Please don't use it directly.\n");
-    fprintf(stderr,"See https://github.com/rjsocha/wyga-php for the usage guidelines.\n");
+    if(!f_quiet) {
+        printf("This is intermeditate image for wyga/php. Please don't use it directly.\n");
+        printf("See https://github.com/rjsocha/wyga-php for the usage guidelines.\n");
+    }
     return (1);
 }

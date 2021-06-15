@@ -1,0 +1,6 @@
+REGISTRY="wyga/php"
+BASE="${WYGA_VERSION}-fpm-buster"
+BASE_TAG_AS="${WYGA_VERSION}-fpm 7.4-fpm 7-fpm ${WYGA_VERSION}-cli 7.4-cli ${WYGA_VERSION} 7.4 7"
+LOCAL_BUILD_EXT="wyga-ext-build:$BASE"
+EXTENSION_TAG_AS="${WYGA_VERSION} 7.4 7"
+EXTENSIONS="intl imap xmlrpc snmp exif gettext gd gmp mcrypt shmop dba pdo_mysql sockets uuid soap xsl ldap igbinary bcmath calendar xdebug gmagick mysqli redis sysvshm pcntl mongodb zip sysvmsg bz2 sysvsem memcached memcache yaml imagick gearman mailparse pgsql pdo_pgsql pspell odbc pdo_odbc"

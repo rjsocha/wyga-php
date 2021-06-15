@@ -1,0 +1,16 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+echo "Build base: ${REGISTRY}:${BASE}"
+docker build -t "${REGISTRY}:${BASE}" --build-arg WYGA_VERSION=${WYGA_VERSION} -f ../Dockerfile.7.4.base ../../context/empty/
+
+for _tag in ${BASE_TAG_AS}
+do
+	echo "TAG as ${REGISTRY}:${_tag}"
+	docker tag "${REGISTRY}:${BASE}" ${REGISTRY}:${_tag}
+done

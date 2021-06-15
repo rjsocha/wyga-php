@@ -1,0 +1,85 @@
+#!/bin/bash
+set -eu
+trap _error ERR
+
+_error() {
+	echo "runtime error... :("
+	exit 1
+}
+
+ME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+WYGA_VERSION=$(basename "${ME}")
+
+cd "${ME}"
+if [[ ! $WYGA_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+then
+	echo "sorry... unable to build..."
+	exit 1
+fi
+
+export WYGA_VERSION
+
+source setup
+
+export REGISTRY
+export BASE
+export BASE_TAG_AS
+export LOCAL_BUILD_EXT
+export EXTENSION_TAG_AS
+export EXTENSIONS
+
+echo "Build for: ${WYGA_VERSION}"
+echo "Registry: $REGISTRY"
+echo "BASE: $BASE ($BASE_TAG_AS)"
+echo "LOCAL_BUILD_EXT: $LOCAL_BUILD_EXT"
+echo "Extensions: $EXTENSIONS ($EXTENSION_TAG_AS)"
+
+cmd="${1:-none}"
+echo "Action: $cmd"
+
+case "$cmd" in
+	show)
+		if [[ -x ./show ]]
+		then
+			./show
+		else
+			../show
+		fi
+		;;
+	base)
+		if [[ -x ./build-base ]]
+		then
+			./build-base
+		else
+			../build-base
+		fi
+		echo "Done"
+		;;
+	ext)
+		if [[ -x ./build-ext ]]
+		then
+			./build-ext
+		else
+			../build-ext
+		fi
+		echo "Done"
+		;;
+	package)
+		if [[ -x ./package-ext ]]
+		then
+			./package-ext
+		else
+			../package-ext
+		fi
+		echo "Done"
+		;;
+	publish)
+		if [[ -x ./package-publish ]]
+		then
+			./package-publish
+		else
+			../package-publish
+		fi
+		echo "Done"
+		;;
+esac

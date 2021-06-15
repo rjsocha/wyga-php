@@ -1,0 +1,22 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+
+docker pull wyga/wyga-php-ext-base-image:latest
+
+for _mod in ${EXTENSIONS}
+do
+	EREGISTRY="${REGISTRY}-ext-${_mod}"
+	echo "Create package: ${EREGISTRY}:${BASE}"
+	docker build -t "${EREGISTRY}:${BASE}" --build-arg BASE=${LOCAL_BUILD_EXT} --build-arg MOD=${_mod} -f ../Dockerfile.7.4.package ../../context/ext/package/
+	for _tag in ${EXTENSION_TAG_AS}
+	do
+		echo "TAG as ${EREGISTRY}:${_tag}"
+		docker tag "${EREGISTRY}:${BASE}" "${EREGISTRY}:${_tag}"
+	done
+done

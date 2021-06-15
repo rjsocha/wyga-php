@@ -1,5 +1,5 @@
-ARG PHP_VERSION
-FROM php:${PHP_VERSION}-fpm-buster AS base
+ARG WYGA_VERSION
+FROM php:${WYGA_VERSION}-fpm-buster AS base
 RUN apt-get purge -y \
  patch \
  dpkg-dev \
@@ -21,15 +21,45 @@ RUN apt-get purge -y \
  libdpkg-perl \
  libperl5.28 \
  perl \
- perl-modules-5.28
+ perl-modules-5.28 \
+ lsb-base \
+ libgcc-8-dev \
+ libubsan1 \
+ m4 \
+ libtsan0 \
+ bzip2 \
+ libasan5 \
+ libatomic1 \
+ libcc1-0 \
+ libgdbm-compat4 \
+ libgdbm6 \
+ libglib2.0-0 \
+ libisl19 \
+ libitm1 \
+ liblsan0 \
+ libmpc3 \
+ libmpfr6 \
+ libmpx2 \
+ libquadmath0 \
+ libgomp1 \
+ libsigsegv2 \
+ make \
+ libicu63 \
+ libxml2
 
-RUN  rm -rf /usr/local/bin/phpdbg /usr/src/* /usr/local/include/*
+RUN apt-mark manual binutils binutils-common binutils-x86-64-linux-gnu libbinutils
+RUN apt-get update -qq &&\
+  DEBIAN_FRONTEND=noninteractive apt-get -qq dist-upgrade &&\
+  apt-get clean all &&\
+  find /var/lib/apt -type f -delete
+RUN rm -rf /usr/local/bin/phpdbg /usr/src/* /usr/local/include/* /usr/share/doc/*
  
 FROM scratch
-ARG PHP_VERSION
+ARG WYGA_VERSION
 COPY --from=base / /
 ENV PHP_INI_DIR=/usr/local/etc/php
-ENV PHP_VERSION=${PHP_VERSION}
+ENV PHP_VERSION=${WYGA_VERSION}
+ENV WYGA_VERSION=${WYGA_VERSION}
 ENTRYPOINT ["docker-php-entrypoint"]
 WORKDIR /var/www/html
 STOPSIGNAL SIGQUIT

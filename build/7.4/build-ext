@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+# 
+LOCAL_EXT="php-build-ext"
+
+echo "Build local extension image: ${LOCAL_EXT}"
+docker build -t "${LOCAL_BUILD_EXT}" --build-arg WYGA_VERSION=${WYGA_VERSION} -f ../Dockerfile.7.4.ext ../../context/ext/build/

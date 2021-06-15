@@ -1,6 +1,5 @@
-ARG PHP_VERSION
-FROM php-build-ext:${PHP_VERSION}-fpm-buster AS base
-
+ARG BASE
+FROM ${BASE} AS base
 ARG MOD
 RUN echo MODULE: ${MOD}
 RUN /usr/bin/_php-ext-deps ${MOD}
