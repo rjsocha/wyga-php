@@ -55,7 +55,30 @@
 ### Tags
  * `7.4.20` `7.4` `7`
 
-## By example:
+## Quick Start
+
+Dockerfile
+
+```
+FROM wyga/php-ext-mysqli:7.4 AS mysqli
+FROM wyga/php-ext-pdo_mysql:7.4 AS pdo_mysql
+FROM wyga/php-ext-gd:7.4 AS gd
+FROM wyga/php-ext-mcrypt:7.4 AS mcrypt
+FROM wyga/php-ext-intl:7.4 AS intl
+
+FROM scratch AS build
+COPY --from=mysqli / /
+COPY --from=pdo_mysql / /
+COPY --from=gd / /
+COPY --from=mcrypt / /
+COPY --from=intl / /
+
+FROM wyga/php:7.4
+COPY --from=build / /
+RUN wyga-php-setup
+```
+
+## Build comparsion:
 
 ### Standard (cold cache / no local images) build:
 
