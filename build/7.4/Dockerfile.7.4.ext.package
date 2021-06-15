@@ -7,5 +7,5 @@ RUN /usr/bin/_php-ext-deps ${MOD}
 COPY / /dist/
 RUN chmod +x /dist/usr/bin/wyga-php-setup
 
-FROM scratch 
+FROM wyga/wyga-php-ext-base-image:latest
 COPY --from=base /dist/ /

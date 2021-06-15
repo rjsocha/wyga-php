@@ -1,0 +1,7 @@
+FROM alpine:3
+RUN apk --no-cache add build-base
+COPY . /build/
+WORKDIR /build
+#
+RUN mkdir /output &&\
+ gcc -o /output/wyga-php-ext-entrypoint -O3 -s -static wyga-php-ext-entrypoint.c
