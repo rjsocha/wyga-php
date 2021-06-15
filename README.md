@@ -1,4 +1,6 @@
-# PoC/alpha stage wyga PHP modular system (binary distribution)
+# PoC/alpha stage `wyga` PHP modular system
+
+## (binary distribution)
 
 ## Base image
  * `wyga/php`
