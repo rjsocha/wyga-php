@@ -9,7 +9,8 @@ fi
 
 docker push "${REGISTRY}:${BASE}"
 docker push "${REGISTRY}-merge:${BASE}"
-
+docker push "${REGISTRY}:${BASE}-fat"
+docker push "${REGISTRY}-merge:${BASE}-fat"
 
 for _mod in ${EXTENSIONS}
 do
@@ -27,6 +28,8 @@ for _tag in ${BASE_TAG_AS}
 do
 	docker push "${REGISTRY}:${_tag}"
 	docker push "${REGISTRY}-merge:${_tag}"
+	docker push "${REGISTRY}:${_tag}-fat"
+	docker push "${REGISTRY}-merge:${_tag}-fat"
 done
 
 for _mod in ${EXTENSIONS}

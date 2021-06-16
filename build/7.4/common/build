@@ -29,17 +29,23 @@ export EXTENSION_TAG_AS
 export EXTENSIONS
 export EXTENSIONS_CUSTOM
 
-echo "Build for: ${WYGA_VERSION}"
-echo "Registry: $REGISTRY"
-echo "BASE: $BASE ($BASE_TAG_AS)"
-echo "LOCAL_BUILD_EXT: $LOCAL_BUILD_EXT"
-echo "Extensions: $EXTENSIONS ($EXTENSION_TAG_AS)"
-echo "Custom extensions: $EXTENSIONS_CUSTOM ($EXTENSION_TAG_AS)"
-
 cmd="${1:-none}"
-echo "Action: $cmd"
+
+{
+	echo "Build for: ${WYGA_VERSION}"
+	echo "Registry: $REGISTRY"
+	echo "BASE: $BASE ($BASE_TAG_AS)"
+	echo "LOCAL_BUILD_EXT: $LOCAL_BUILD_EXT"
+	echo "Extensions: $EXTENSIONS ($EXTENSION_TAG_AS)"
+	echo "Custom extensions: $EXTENSIONS_CUSTOM ($EXTENSION_TAG_AS)"
+	echo "Action: $cmd"
+} >&2
+
 
 case "$cmd" in
+	show-deps)
+		../show-deps
+		;;
 	md)
 		if [[ -x ./show ]]
 		then
@@ -49,13 +55,13 @@ case "$cmd" in
 		fi
 		;;
 	base-merge)
-		if [[ -x ./build-base-merge ]]
-		then
-			./build-base-merge
-		else
-			../build-base-merge
-		fi
-		echo "Done"
+		../build-base-merge
+		;;
+	base-merge-fat)
+		../build-base-merge-fat
+		;;
+	base-fat)
+		../build-base-fat
 		;;
 	base)
 		if [[ -x ./build-base ]]
