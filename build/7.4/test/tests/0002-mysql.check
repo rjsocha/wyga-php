@@ -1,0 +1,14 @@
+#!/bin/bash
+set -eu
+set -x
+me=$1
+trap _error ERR
+
+_error() {
+	docker image rm wyga-test-$me
+	exit 1
+}
+
+docker build -t wyga-test-$me --build-arg V=$WYGA_VERSION -f $me.Dockerfile $me
+docker run --rm wyga-test-$me php /check/check1.php
+docker image rm wyga-test-$me

@@ -1,0 +1,30 @@
+ARG V8Version
+ARG WYGA_VERSION
+FROM wyga/v8-lib-buster:${V8Version} AS V8Lib
+
+ARG WYGA_VERSION
+FROM php:${WYGA_VERSION}-fpm-buster AS build
+ARG WYGA_VERSION
+COPY --from=V8Lib / /
+# dirty hack
+RUN pecl bundle v8js &&\
+    cd v8js &&\
+    sed -i -e 's/"c++11"/"c++14"/' config.m4 &&\ 
+    phpize &&\
+    ./configure --with-v8js CPPFLAGS="-DV8_COMPRESS_POINTERS" &&\
+    make &&\
+    make install
+COPY . /usr/bin/
+RUN chmod +x /usr/bin/_php-ext-deps /usr/bin/_php-ext-list
+ENV WYGA_VERSION=${WYGA_VERSION}
+COPY --from=V8Lib / /dist/
+RUN rm -rf /dist/usr/local/include
+
+#FROM scratch as dist
+#COPY --from=build /dist /dist
+#COPY . /dist/
+#RUN chmod +x /dist/usr/bin/wyga-php-setup
+
+#FROM wyga/wyga-php-ext-base-image:latest
+#COPY --from=dist /dist/ /
+

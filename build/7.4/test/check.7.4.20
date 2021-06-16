@@ -1,0 +1,4 @@
+#!/bin/bash
+ME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+cd "$ME"
+./check 7.4.20

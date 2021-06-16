@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 _ext=$(php-config --extension-dir)
-_exclude_libs="^(libbsd0|libc6|libgcc1|libstdc\+\+6|libuuid1|zlib1g|libcom-err2|libssl1.1|libffi6|libgmp10|libgnutls30|libgssapi-krb5-2|libhogweed4|libidn2-0|libkeyutils1|libkrb5-3|libkrb5support0|libk5crypto3|libldap-2.4-2|libnettle6|libp11-kit0|libsasl2-2|libtasn1-6|libunistring2|libaudit1|libcap-ng0|libpam0g|liblzma5|libdb5.3|libgcrypt20|libgpg-error0|libbz2-1.0|libzstd1)$"
+_exclude_libs="^(libbsd0|libc6|libgcc1|libstdc\+\+6|libuuid1|zlib1g|libcom-err2|libssl1.1|libffi6|libgmp10|libgnutls30|libgssapi-krb5-2|libhogweed4|libidn2-0|libkeyutils1|libkrb5-3|libkrb5support0|libk5crypto3|libldap-2.4-2|libnettle6|libp11-kit0|libsasl2-2|libtasn1-6|libunistring2|libaudit1|libcap-ng0|libpam0g|liblzma5|libdb5.3|libgcrypt20|libgpg-error0|libbz2-1.0|libzstd1|libicu63|libxml2)$"
 _exclude_so="opcache|sodium"
 _base=$1
 if [[ -z ${_base} ]]

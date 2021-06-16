@@ -13,7 +13,7 @@ WYGA_VERSION=$(basename "${ME}")
 cd "${ME}"
 if [[ ! $WYGA_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
 then
-	echo "sorry... unable to build..."
+	echo "sorry... unable to build... wrong working dir"
 	exit 1
 fi
 
@@ -27,12 +27,14 @@ export BASE_TAG_AS
 export LOCAL_BUILD_EXT
 export EXTENSION_TAG_AS
 export EXTENSIONS
+export EXTENSIONS_CUSTOM
 
 echo "Build for: ${WYGA_VERSION}"
 echo "Registry: $REGISTRY"
 echo "BASE: $BASE ($BASE_TAG_AS)"
 echo "LOCAL_BUILD_EXT: $LOCAL_BUILD_EXT"
 echo "Extensions: $EXTENSIONS ($EXTENSION_TAG_AS)"
+echo "Custom extensions: $EXTENSIONS_CUSTOM ($EXTENSION_TAG_AS)"
 
 cmd="${1:-none}"
 echo "Action: $cmd"
@@ -64,12 +66,32 @@ case "$cmd" in
 		fi
 		echo "Done"
 		;;
+	ext:*)
+		_b="${cmd##*:}"
+		if [[ -x ./build-ext.${_b} ]]
+		then
+			./build-ext.${_b}
+		else
+			../build-ext.${_b}
+		fi
+		echo "Done"
+		;;
 	package)
 		if [[ -x ./package-ext ]]
 		then
 			./package-ext
 		else
 			../package-ext
+		fi
+		echo "Done"
+		;;
+	package:*)
+		_b="${cmd##*:}"
+		if [[ -x ./package-ext.${_b} ]]
+		then
+			./package-ext.${_b}
+		else
+			../package-ext.${_b}
 		fi
 		echo "Done"
 		;;

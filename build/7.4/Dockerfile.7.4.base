@@ -43,9 +43,7 @@ RUN apt-get purge -y \
  libquadmath0 \
  libgomp1 \
  libsigsegv2 \
- make \
- libicu63 \
- libxml2
+ make
 
 RUN apt-mark manual binutils binutils-common binutils-x86-64-linux-gnu libbinutils
 RUN apt-get update -qq &&\

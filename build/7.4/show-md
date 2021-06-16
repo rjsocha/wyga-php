@@ -21,7 +21,8 @@ echo -ne "\n\n"
 echo "## Availible extenstions"
 echo -ne "\n"
 echo "### Images"
-for _mod in $(echo -e ${EXTENSIONS// /\\n} | sort)
+_ext="${EXTENSIONS} ${EXTENSIONS_CUSTOM}"
+for _mod in $(echo -e ${_ext// /\\n} | sort)
 do
 	EREGISTRY="${REGISTRY}-ext-${_mod}"
 	echo " * \`${EREGISTRY}\`"

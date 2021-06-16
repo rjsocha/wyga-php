@@ -47,6 +47,7 @@
  * `wyga/php-ext-sysvsem`
  * `wyga/php-ext-sysvshm`
  * `wyga/php-ext-uuid`
+ * `wyga/php-ext-v8js`
  * `wyga/php-ext-xdebug`
  * `wyga/php-ext-xmlrpc`
  * `wyga/php-ext-xsl`

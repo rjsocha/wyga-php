@@ -1,0 +1,12 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+
+LOCAL_BUILD_EXT="${LOCAL_BUILD_EXT}-v8js"
+echo "Build local extension image: ${LOCAL_BUILD_EXT}"
+docker build -t "${LOCAL_BUILD_EXT}" --build-arg WYGA_VERSION=${WYGA_VERSION} --build-arg V8Version=8.8 -f ../Dockerfile.7.4.ext.v8js ../../context/ext/build/
