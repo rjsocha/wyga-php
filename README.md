@@ -1,6 +1,36 @@
 # PoC/alpha stage `wyga` PHP modular system
 
-## (binary distribution)
+Precompiled PHP extensions for Docker image crearation.
+
+## Quick Start
+
+Dockerfile
+
+```
+FROM wyga/php-ext-mysqli:7.4 AS mysqli
+FROM wyga/php-ext-pdo_mysql:7.4 AS pdo_mysql
+FROM wyga/php-ext-gd:7.4 AS gd
+FROM wyga/php-ext-mcrypt:7.4 AS mcrypt
+FROM wyga/php-ext-intl:7.4 AS intl
+
+FROM scratch AS build
+COPY --from=mysqli / /
+COPY --from=pdo_mysql / /
+COPY --from=gd / /
+COPY --from=mcrypt / /
+COPY --from=intl / /
+
+FROM wyga/php:7.4
+COPY --from=build / /
+RUN wyga-php-setup
+```
+
+
+## Binary distribution
+
+AMD64 only for the moment, based on buster (Debian 10 images).\
+PHP 7.4 only for this moment.\
+Works with upstream PHP images.
 
 ## Base image
  * `wyga/php`
@@ -55,29 +85,6 @@
  * `wyga/php-ext-zip`
 ### Tags
  * `7.4.20` `7.4` `7`
-
-## Quick Start
-
-Dockerfile
-
-```
-FROM wyga/php-ext-mysqli:7.4 AS mysqli
-FROM wyga/php-ext-pdo_mysql:7.4 AS pdo_mysql
-FROM wyga/php-ext-gd:7.4 AS gd
-FROM wyga/php-ext-mcrypt:7.4 AS mcrypt
-FROM wyga/php-ext-intl:7.4 AS intl
-
-FROM scratch AS build
-COPY --from=mysqli / /
-COPY --from=pdo_mysql / /
-COPY --from=gd / /
-COPY --from=mcrypt / /
-COPY --from=intl / /
-
-FROM wyga/php:7.4
-COPY --from=build / /
-RUN wyga-php-setup
-```
 
 ## Build comparsion:
 
