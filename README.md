@@ -97,9 +97,6 @@ Works with upstream PHP images.
 ### Tags
 
  * `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20-cli` `7.4-cli` `7-cli` `7.4.20` `7.4` `7`
- * `7.4.20-fpm-fat` `7.4-fpm-fat` `7-fpm-fat` `7.4.20-cli-fat` `7.4-cli-fat` `7-cli-fat` `7.4.20-fat` `7.4-fat` `7-fat`
-
- `fat version have all module's dependencies preinstalled`
 
 ## Availible extenstions
 
