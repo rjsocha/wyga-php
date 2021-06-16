@@ -28,7 +28,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
         dba \
         gmagick \
         imagick \
-        igbinary \
         imap \
         ldap \
         shmop \
@@ -47,6 +46,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
 	odbc \
 	pdo_odbc
 
+RUN install-php-extensions \
+        igbinary
 COPY / /usr/bin/
 RUN chmod +x /usr/bin/_php-ext-deps /usr/bin/_php-ext-list
 ENV WYGA_VERSION=${WYGA_VERSION}

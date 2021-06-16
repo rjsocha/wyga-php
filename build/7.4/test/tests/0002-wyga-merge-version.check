@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eu
+set -x
+v=$(docker run --rm wyga/php-merge:${WYGA_VERSION} sh -c "echo \${WYGA_VERSION}")
+[[ $WYGA_VERSION == $v ]]
