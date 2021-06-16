@@ -87,7 +87,7 @@ And build your image.
 
 AMD64 only for the moment, based on buster (Debian 10 images).\
 PHP 7.4 only for this moment.\
-Works with upstream PHP images.
+[Works with upstream PHP images.](https://hub.docker.com/_/php)
 
 ## Base image
 
