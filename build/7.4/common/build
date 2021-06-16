@@ -48,6 +48,15 @@ case "$cmd" in
 			../show-md
 		fi
 		;;
+	base-merge)
+		if [[ -x ./build-base-merge ]]
+		then
+			./build-base-merge
+		else
+			../build-base-merge
+		fi
+		echo "Done"
+		;;
 	base)
 		if [[ -x ./build-base ]]
 		then

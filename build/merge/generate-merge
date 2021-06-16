@@ -1,0 +1,23 @@
+#!/bin/bash
+set -eu
+if [[ "$@" =~ ^[0-9]+$ ]]
+then
+    REGISTRY="wyga/merge"
+    for _n in $(seq 1 ${1})
+    do
+        BASE=${_n}
+        echo "Build base: ${REGISTRY}:${BASE}"
+        (
+          echo "FROM scratch"
+              _s=$((${_n} - 1))
+          for _c in $(seq 0 ${_s})
+          do
+            echo "ONBUILD COPY --from=${_c} / /"
+          done
+        ) | docker build -t "${REGISTRY}:${BASE}" -
+        docker push "${REGISTRY}:${BASE}"
+    done
+else
+    echo "$0 <number>"
+fi
+exit 0

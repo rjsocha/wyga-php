@@ -8,6 +8,7 @@ then
 fi
 
 docker push "${REGISTRY}:${BASE}"
+docker push "${REGISTRY}-merge:${BASE}"
 
 
 for _mod in ${EXTENSIONS}
@@ -25,6 +26,7 @@ done
 for _tag in ${BASE_TAG_AS}
 do
 	docker push "${REGISTRY}:${_tag}"
+	docker push "${REGISTRY}-merge:${_tag}"
 done
 
 for _mod in ${EXTENSIONS}

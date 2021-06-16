@@ -4,8 +4,33 @@ Precompiled PHP extensions for Docker image crearation.
 
 ## Quick Start
 
-Dockerfile
+With ONBUILD support
+```
+FROM wyga/php-ext-mysqli:7.4
+FROM wyga/php-ext-pdo_mysql:7.4
+FROM wyga/php-ext-gd:7.4
+FROM wyga/php-ext-mcrypt:7.4
+FROM wyga/php-ext-intl:7.4
+FROM wyga/merge:5 AS merge
 
+FROM wyga/php-merge:7.4-fpm
+```
+
+Other usage example:
+```
+FROM scratch AS merge
+COPY --from=wyga/php-ext-intl:7.4 / /
+COPY --from=wyga/php-ext-mysqli:7.4 / /
+COPY --from=wyga/php-ext-v8js:7.4 / /
+COPY --from=wyga/php-ext-gd:7.4 / /
+
+FROM wyga/php:7.4-fpm
+COPY --from=merge / /
+RUN wyga-php-setup
+```
+
+
+Verbose example:
 ```
 FROM wyga/php-ext-mysqli:7.4 AS mysqli
 FROM wyga/php-ext-pdo_mysql:7.4 AS pdo_mysql
@@ -13,15 +38,15 @@ FROM wyga/php-ext-gd:7.4 AS gd
 FROM wyga/php-ext-mcrypt:7.4 AS mcrypt
 FROM wyga/php-ext-intl:7.4 AS intl
 
-FROM scratch AS build
+FROM scratch AS merge
 COPY --from=mysqli / /
 COPY --from=pdo_mysql / /
 COPY --from=gd / /
 COPY --from=mcrypt / /
 COPY --from=intl / /
 
-FROM wyga/php:7.4
-COPY --from=build / /
+FROM wyga/php:7.4-fpm
+COPY --from=merge / /
 RUN wyga-php-setup
 ```
 
@@ -33,13 +58,18 @@ PHP 7.4 only for this moment.\
 Works with upstream PHP images.
 
 ## Base image
+
  * `wyga/php`
+ * `wyga/php-merge`
+
 ### Tags
+
  * `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20-cli` `7.4-cli` `7-cli` `7.4.20` `7.4` `7`
 
 ## Availible extenstions
 
 ### Images
+
  * `wyga/php-ext-bcmath`
  * `wyga/php-ext-bz2`
  * `wyga/php-ext-calendar`
@@ -83,7 +113,9 @@ Works with upstream PHP images.
  * `wyga/php-ext-xsl`
  * `wyga/php-ext-yaml`
  * `wyga/php-ext-zip`
+
 ### Tags
+
  * `7.4.20` `7.4` `7`
 
 ## Build comparsion:

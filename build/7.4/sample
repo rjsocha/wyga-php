@@ -1,0 +1,5 @@
+FROM wyga/php-ext-mysqli:7.4
+FROM wyga/php-ext-gd:7.4
+
+FROM wyga/merge:2 AS merge
+FROM wyga/php-merge:7.4.20

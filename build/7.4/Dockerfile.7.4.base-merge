@@ -1,0 +1,4 @@
+ARG WYGA_VERSION
+FROM wyga/php:${WYGA_VERSION}-fpm-buster 
+ONBUILD COPY --from=merge / /
+ONBUILD RUN wyga-php-setup

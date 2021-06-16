@@ -1,5 +1,6 @@
 all:
 	./build base
+	./build base-merge
 	./build ext
 	./build ext:v8js
 	./build package
