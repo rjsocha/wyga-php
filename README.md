@@ -4,6 +4,20 @@ Precompiled PHP extensions for Docker image crearation.
 
 ## Quick Start
 
+Build image:
+```
+cat <<EOF | docker build -t wyga-php-test:7.4 -
+FROM wyga/php-ext-mysqli:7.4
+FROM wyga/php-ext-pdo_mysql:7.4
+FROM wyga/php-ext-gd:7.4
+FROM wyga/php-ext-mcrypt:7.4
+FROM wyga/php-ext-intl:7.4
+FROM wyga/merge:5 AS merge
+
+FROM wyga/php-merge:7.4-fpm
+EOF
+```
+
 With ONBUILD support
 ```
 FROM wyga/php-ext-mysqli:7.4
