@@ -76,8 +76,8 @@ FROM wyga/php-ext-pgsql:7.4
 FROM wyga/php-ext-zip:7.4
 ```
 
-Count number of FROM's. In this example we have 6.\
-Merge previous imports with `wyga/merge`. Put  6  as a tag (number of previous imports) and put `merge` as stage name (**important!**).
+Count number of FROM's. In this example we have 6. Merge previous imports with `wyga/merge`.\
+Put `6` as a tag (number of previous imports) and put `merge` as stage name (**important!**).
 
 ```
 FROM wyga/merge:6 AS merge
