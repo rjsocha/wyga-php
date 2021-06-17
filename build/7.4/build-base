@@ -7,4 +7,4 @@ then
 	exit 1
 fi
 echo "Build base: $LOCAL_BUILD_BASE"
-docker build -t "$LOCAL_BUILD_BASE" --build-arg WYGA_VERSION=${WYGA_VERSION} --pull --no-cache -f ../Dockerfile.7.4.base ../../context/empty/
+docker build -t "$LOCAL_BUILD_BASE" --build-arg WYGA_VERSION=${WYGA_VERSION} --pull --no-cache -f ../Dockerfile.7.4.base ../../context/base/

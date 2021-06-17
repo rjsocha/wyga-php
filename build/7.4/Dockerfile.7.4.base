@@ -51,3 +51,5 @@ RUN apt-get update -qq &&\
   apt-get clean all &&\
   find /var/lib/apt -type f -delete
 RUN rm -rf /usr/local/bin/phpdbg /usr/src/* /usr/local/include/* /usr/share/doc/*
+COPY docker-php-entrypoint-cli /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-php-entrypoint-cli

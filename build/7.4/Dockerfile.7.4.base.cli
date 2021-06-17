@@ -10,4 +10,4 @@ ENV PHP_VERSION=${WYGA_VERSION}
 ENV WYGA_VERSION=${WYGA_VERSION}
 
 CMD ["php", "-a"]
-ENTRYPOINT ["docker-php-entrypoint"]
+ENTRYPOINT ["docker-php-entrypoint-cli"]
