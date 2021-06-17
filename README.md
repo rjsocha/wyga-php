@@ -20,7 +20,7 @@ FROM wyga/php-merge:7.4-fpm
 
 try:
 ```
-docker build -t wyga-php-7.4:wyga -f Dockerfile.merge \
+docker build -t wyga-php-7.4:wyga --pull -f Dockerfile.merge \
  "https://github.com/rjsocha/wyga-php.git#master:examples"
 ```
 
