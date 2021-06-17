@@ -1,0 +1,13 @@
+ARG WYGA_VERSION
+ARG IMAGE
+FROM ${IMAGE} AS base
+ 
+FROM scratch
+ARG WYGA_VERSION
+COPY --from=base / /
+ENV PHP_INI_DIR=/usr/local/etc/php
+ENV PHP_VERSION=${WYGA_VERSION}
+ENV WYGA_VERSION=${WYGA_VERSION}
+
+CMD ["php", "-a"]
+ENTRYPOINT ["docker-php-entrypoint-cli"]

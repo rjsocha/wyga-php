@@ -1,0 +1,19 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+_deps=""
+for _mod in ${EXTENSIONS}
+do
+	echo "Processing: ${_mod}"
+	EREGISTRY="${REGISTRY}-ext-${_mod}"
+	_deps="$_deps $(docker run --rm "${EREGISTRY}:${BASE}" -q -i -d | grep ^deps: | cut -c7- || true)"
+done
+for _d in ${_deps}
+do
+	echo ${_d}
+done | sort | uniq

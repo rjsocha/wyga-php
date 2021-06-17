@@ -1,3 +1,4 @@
+BUILD_BASE=8.0
 REGISTRY="wyga/php"
 BASE="${WYGA_VERSION}"
 BASE_FPM_TAG_AS="${WYGA_VERSION}-fpm 8.0-fpm 8-fpm 8.0 8"
@@ -7,3 +8,4 @@ LOCAL_BUILD_BASE="wyga-php-base-build:$BASE"
 LOCAL_BUILD_EXT="wyga-php-ext-build:$BASE"
 EXTENSIONS="intl imap xmlrpc snmp exif gettext gd gmp mcrypt shmop dba pdo_mysql sockets uuid soap xsl ldap igbinary bcmath calendar xdebug gmagick mysqli redis sysvshm pcntl mongodb zip sysvmsg bz2 sysvsem memcached memcache yaml imagick gearman mailparse pgsql pdo_pgsql pspell odbc pdo_odbc"
 EXTENSIONS_CUSTOM="v8js"
+DOCKER_BUILD_EXTRA="--pull --no-cache"

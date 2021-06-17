@@ -1,16 +1,1 @@
-#!/bin/bash
-set -eu
-WYGA_VERSION="${WYGA_VERSION:-none}"
-if [[ "${WYGA_VERSION}" == "none" ]]
-then
-	echo "do not run this script directly!"
-	exit 1
-fi
-echo "Build base: ${REGISTRY}:${BASE}"
-docker build -t "${REGISTRY}:${BASE}" --build-arg WYGA_VERSION=${WYGA_VERSION} --build-arg IMAGE=$LOCAL_BUILD_BASE -f ../Dockerfile.8.0.base.fpm ../../context/empty/
-
-for _tag in ${BASE_FPM_TAG_AS}
-do
-	echo "TAG as ${REGISTRY}:${_tag}"
-	docker tag "${REGISTRY}:${BASE}" "${REGISTRY}:${_tag}"
-done
+../common/build-base-fpm

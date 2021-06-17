@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+echo "Build local extension image: ${LOCAL_BUILD_EXT}"
+docker build -t "${LOCAL_BUILD_EXT}" --build-arg WYGA_VERSION=${WYGA_VERSION} ${DOCKER_BUILD_EXTRA} -f ../Dockerfile.${BUILD_BASE}.ext ../../context/ext/build/

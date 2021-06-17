@@ -1,4 +1,1 @@
-ARG WYGA_VERSION
-FROM wyga/php:${WYGA_VERSION}-cli
-ONBUILD COPY --from=merge / /
-ONBUILD RUN wyga-php-setup
+../common/Dockerfile.base-merge.cli

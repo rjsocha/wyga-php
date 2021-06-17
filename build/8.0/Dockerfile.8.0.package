@@ -1,10 +1,1 @@
-ARG BASE
-FROM ${BASE} AS base
-ARG MOD
-RUN echo MODULE: ${MOD}
-RUN /usr/bin/_php-ext-deps ${MOD}
-COPY / /dist/
-RUN chmod +x /dist/usr/bin/wyga-php-setup
-
-FROM wyga/wyga-php-ext-base-image:latest
-COPY --from=base /dist/ /
+../common/Dockerfile.package

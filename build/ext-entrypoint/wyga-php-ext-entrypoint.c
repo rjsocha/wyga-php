@@ -17,6 +17,7 @@
 #define WYGA "/wyga/php/ext"
 #define MODULE "/module.dep"
 #define VERSION "/version"
+#define REQUIRE "/require"
 
 /*
 * Wyswietla plik w jeden lini (chomp(nl))
@@ -94,6 +95,8 @@ char fn[256];
         printf("ext: %s\n",ext);
         snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,VERSION);
         showfile(fn,"version: ","\n");
+        snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,REQUIRE);
+        showfile(fn,"require: ","\n");
         if(a_deps) {
             snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,MODULE);
             showfile(fn,"deps: ","\n");

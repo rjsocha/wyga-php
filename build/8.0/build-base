@@ -1,10 +1,1 @@
-#!/bin/bash
-set -eu
-WYGA_VERSION="${WYGA_VERSION:-none}"
-if [[ "${WYGA_VERSION}" == "none" ]]
-then
-	echo "do not run this script directly!"
-	exit 1
-fi
-echo "Build base: $LOCAL_BUILD_BASE"
-docker build -t "$LOCAL_BUILD_BASE" --build-arg WYGA_VERSION=${WYGA_VERSION} --pull --no-cache -f ../Dockerfile.8.0.base ../../context/base/
+../common/build-base

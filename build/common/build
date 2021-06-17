@@ -20,6 +20,10 @@ fi
 export WYGA_VERSION
 
 source setup
+if [[ -f ./setup.local ]]
+then
+	source setup.local
+fi
 
 export REGISTRY
 export BASE
@@ -30,6 +34,8 @@ export LOCAL_BUILD_EXT
 export EXTENSION_TAG_AS
 export EXTENSIONS
 export EXTENSIONS_CUSTOM
+export DOCKER_BUILD_EXTRA
+export BUILD_BASE
 
 cmd="${1:-none}"
 
@@ -43,6 +49,8 @@ cmd="${1:-none}"
 	echo "LOCAL_BUILD_EXT: $LOCAL_BUILD_EXT"
 	echo "Extensions: $EXTENSIONS ($EXTENSION_TAG_AS)"
 	echo "Custom extensions: $EXTENSIONS_CUSTOM ($EXTENSION_TAG_AS)"
+	echo "DOCKER_BUILD_EXTRA: $DOCKER_BUILD_EXTRA"
+	echo "BUILD_BASE: $BUILD_BASE"
 	echo "Action: $cmd"
 } >&2
 
