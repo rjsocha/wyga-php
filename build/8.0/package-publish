@@ -18,12 +18,6 @@ do
 	docker push "${EREGISTRY}:${BASE}"
 done
 
-for _mod in ${EXTENSIONS_CUSTOM}
-do
-	EREGISTRY="${REGISTRY}-ext-${_mod}"
-	docker push "${EREGISTRY}:${BASE}"
-done
-
 for _tag in ${BASE_FPM_TAG_AS}
 do
 	docker push "${REGISTRY}:${_tag}"
@@ -37,15 +31,6 @@ do
 done
 
 for _mod in ${EXTENSIONS}
-do
-	EREGISTRY="${REGISTRY}-ext-${_mod}"
-	for _tag in ${EXTENSION_TAG_AS}
-	do
-		docker push "${EREGISTRY}:${_tag}"
-	done
-done
-
-for _mod in ${EXTENSIONS_CUSTOM}
 do
 	EREGISTRY="${REGISTRY}-ext-${_mod}"
 	for _tag in ${EXTENSION_TAG_AS}

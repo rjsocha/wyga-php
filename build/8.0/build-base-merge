@@ -8,7 +8,7 @@ then
 fi
 REGISTRY="${REGISTRY}-merge"
 echo "Build base: ${REGISTRY}:${BASE}"
-docker build -t "${REGISTRY}:${BASE}" --build-arg WYGA_VERSION=${WYGA_VERSION} -f ../Dockerfile.7.4.base-merge.fpm ../../context/empty/
+docker build -t "${REGISTRY}:${BASE}" --build-arg WYGA_VERSION=${WYGA_VERSION} -f ../Dockerfile.8.0.base-merge.fpm ../../context/empty/
 
 for _tag in ${BASE_FPM_TAG_AS}
 do
@@ -18,7 +18,7 @@ done
 
 BASE="${BASE}-cli"
 echo "Build base: ${REGISTRY}:${BASE}"
-docker build -t "${REGISTRY}:${BASE}" --build-arg WYGA_VERSION=${WYGA_VERSION} -f ../Dockerfile.7.4.base-merge.cli ../../context/empty/
+docker build -t "${REGISTRY}:${BASE}" --build-arg WYGA_VERSION=${WYGA_VERSION} -f ../Dockerfile.8.0.base-merge.cli ../../context/empty/
 
 for _tag in ${BASE_CLI_TAG_AS}
 do

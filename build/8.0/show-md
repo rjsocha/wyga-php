@@ -1,0 +1,37 @@
+#!/bin/bash
+set -eu
+WYGA_VERSION="${WYGA_VERSION:-none}"
+if [[ "${WYGA_VERSION}" == "none" ]]
+then
+	echo "do not run this script directly!"
+	exit 1
+fi
+
+echo "## Base image"
+echo " * \`${REGISTRY}\`"
+
+echo "### Tags"
+echo -n " *"
+for _tag in ${BASE_FPM_TAG_AS} ${BASE_CLI_TAG_AS}
+do
+	echo -n " \`${_tag}\`"
+done
+echo -ne "\n\n"
+
+echo "## Availible extenstions"
+echo -ne "\n"
+echo "### Images"
+_ext="${EXTENSIONS}"
+for _mod in $(echo -e ${_ext// /\\n} | sort)
+do
+	EREGISTRY="${REGISTRY}-ext-${_mod}"
+	echo " * \`${EREGISTRY}\`"
+done
+
+echo "### Tags"
+echo -n " *"
+for _tag in ${EXTENSION_TAG_AS}
+do
+	echo -n " \`${_tag}\`"
+done
+echo -ne "\n"

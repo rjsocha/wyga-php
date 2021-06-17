@@ -86,7 +86,6 @@ And build your image.
 ## Binary distribution
 
 AMD64 only for the moment, based on buster (Debian 10 images).\
-PHP 7.4 only for this moment.\
 [Works with upstream PHP images.](https://hub.docker.com/_/php)
 
 ## Base image
@@ -96,7 +95,11 @@ PHP 7.4 only for this moment.\
 
 ### Tags
 
- * `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20-cli` `7.4-cli` `7-cli` `7.4.20` `7.4` `7`
+ * `8.0.7-fpm` `8.0-fpm` `8-fpm` `8.0.7` `8.0` `8`
+ * `8.0.7-cli` `8.0-cli` `8-cli`
+
+ * `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20` `7.4` `7`
+ * `7.4.20-cli` `7.4-cli` `7-cli`
 
 ## Availible extenstions
 
@@ -139,7 +142,6 @@ PHP 7.4 only for this moment.\
  * `wyga/php-ext-sysvsem`
  * `wyga/php-ext-sysvshm`
  * `wyga/php-ext-uuid`
- * `wyga/php-ext-v8js`
  * `wyga/php-ext-xdebug`
  * `wyga/php-ext-xmlrpc`
  * `wyga/php-ext-xsl`
@@ -147,6 +149,15 @@ PHP 7.4 only for this moment.\
  * `wyga/php-ext-zip`
 
 ### Tags
+
+ * `7.4.20` `7.4` `7`
+ * `8.0.7` `8.0` `8`
+
+#### Extra extensions
+
+ * `wyga/php-ext-v8js`   V8 version 8.8 engine
+
+#### Tags
 
  * `7.4.20` `7.4` `7`
 
@@ -210,7 +221,7 @@ COPY --from=gd / /
 COPY --from=mcrypt / /
 COPY --from=intl / /
 
-FROM wyga/php:${V}-fpm-buster
+FROM wyga/php:${V}-fpm
 COPY --from=build / /
 RUN wyga-php-setup
 ```
@@ -256,7 +267,7 @@ COPY --from=gd / /
 COPY --from=mcrypt / /
 COPY --from=intl / /
 
-FROM php:${V}-fpm-buster
+FROM php:${V}-fpm
 COPY --from=build / /
 RUN wyga-php-setup
 ```
