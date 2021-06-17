@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+_ini=`php-config --ini-dir`
+echo "session.serialize_handler=igbinary" >"${_ini}/wyga-php-ext-igbinary.ini"

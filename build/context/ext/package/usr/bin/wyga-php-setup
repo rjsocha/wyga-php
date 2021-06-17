@@ -9,6 +9,7 @@ then
 fi
 
 _list_deps() {
+local _ext
   for _ext in $(find "${WYGA}" -mindepth 1 -maxdepth 1 -type d)
   do
     if [[ -s "${_ext}/module.dep" ]]
@@ -19,6 +20,7 @@ _list_deps() {
 }
 
 _list_ext() {
+local _ext
   for _ext in $(find "${WYGA}" -mindepth 1 -maxdepth 1 -type d)
   do
     _mod=$(basename "${_ext}")
@@ -26,16 +28,46 @@ _list_ext() {
   done
 }
 
+_check_require() {
+local _ext
+  for _ext in $(_list_ext)
+  do
+      if [[ -f ${WYGA}/${_ext}/require ]]
+      then
+          for _require in $(<${WYGA}/${_ext}/require)
+          do
+            if [[ -d ${WYGA}/${_require} ]]
+            then
+	      echo "Checking required extension ${_require} (${_ext}): OK"
+            else
+	      echo "Checking required extension ${_require} (${_ext}): MISSING"
+              echo -e "\nPlease add:\n"
+              echo -e "\tFROM wyga/php-ext-${_require}:${WYGA_VERSION}"
+              echo -e "\nUnable to contiune... aborting\n"
+              exit 100
+            fi
+          done
+      fi
+  done
+}
+
 if [[ -d ${WYGA} ]]
 then
+  # check require
+  _check_require
   # install deps
   _deps=$(_list_deps)
   if [[ -n ${_deps} ]]
   then
     echo "deps: ${_deps}"
     export DEBIAN_FRONTEND=noninteractive
+    echo "1: update image repositories"
     apt-get update &>/dev/null
+    echo "2: upgrade image"
+    apt-get dist-upgrade -qq &>/dev/null
+    echo "3: install image dependencies"
     apt-get install --no-install-recommends -qq ${_deps} -qq &>/dev/null
+    echo "4: cleanup"
     apt-get clean all
     find /var/lib/apt -type f -delete
   else
@@ -49,6 +81,23 @@ then
     then
       echo "extensions: ${_ext}"
       docker-php-ext-enable ${_ext}
+      # activte
+      for _act in $_ext
+      do
+        if [[ -x ${WYGA}/${_act}/activate ]]
+        then
+                (
+                  cd "${WYGA}/${_act}"
+                  if ./activate
+                  then
+                    echo "activated: ${_act}"
+                  else
+                    echo -e "\nactivation failed for: ${_act}\n aborting...\n"
+                    exit 10
+                  fi
+                )
+        fi
+      done
     else
       echo "no extensions: OK"
     fi

@@ -14,8 +14,8 @@ RUN pecl bundle v8js &&\
     ./configure --with-v8js CPPFLAGS="-DV8_COMPRESS_POINTERS" &&\
     make &&\
     make install
-COPY . /usr/bin/
-RUN chmod +x /usr/bin/_php-ext-deps /usr/bin/_php-ext-list
+COPY / /
+RUN chmod +x /usr/bin/_php-ext-package /usr/bin/_php-ext-list
 ENV WYGA_VERSION=${WYGA_VERSION}
 COPY --from=V8Lib / /dist/
 RUN rm -rf /dist/usr/local/include

@@ -30,4 +30,17 @@ then
 	ldd "${_so}"  | fgrep '=>' | awk '{print $3}' | xargs -l1 dpkg -S | awk -F: '{print $1}' | sort | uniq | egrep -v "${_exclude_libs}" >"/dist/wyga/php/ext/${_base}/module.dep"
 fi
 
+if [[ -f /require/${_base} ]]
+then
+	echo -e "\n#######  Adding /require for ${_base}\n"
+	cat "/require/${_base}"
+	cp "/require/${_base}" "/dist/wyga/php/ext/${_base}/require"
+fi
+
+if [[ -f /activate/${_base} ]]
+then
+	echo -e "\n#######  Adding /acivate for ${_base}\n"
+	cp "/activate/${_base}" "/dist/wyga/php/ext/${_base}/activate"
+	chmod +x "/dist/wyga/php/ext/${_base}/activate"
+fi
 exit 0
