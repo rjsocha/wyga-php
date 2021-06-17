@@ -1,0 +1,8 @@
+FROM wyga/php-ext-mysqli:8.0
+FROM wyga/php-ext-pdo_mysql:8.0
+FROM wyga/php-ext-gd:8.0
+FROM wyga/php-ext-mcrypt:8.0
+FROM wyga/php-ext-intl:8.0
+
+FROM wyga/merge:5 AS merge
+FROM wyga/php-merge:8.0-fpm

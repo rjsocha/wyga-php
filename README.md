@@ -13,14 +13,14 @@ FROM wyga/php-ext-pdo_mysql:7.4
 FROM wyga/php-ext-gd:7.4
 FROM wyga/php-ext-mcrypt:7.4
 FROM wyga/php-ext-intl:7.4
-FROM wyga/merge:5 AS merge
 
+FROM wyga/merge:5 AS merge
 FROM wyga/php-merge:7.4-fpm
 ```
 
 try:
 ```
-docker build -t wyga-php-7.4:wyga --pull -f Dockerfile.merge \
+docker build -t wyga-php-7.4:wyga --pull -f Dockerfile.merge.7.4 \
  "https://github.com/rjsocha/wyga-php.git#master:examples"
 ```
 
@@ -31,9 +31,15 @@ FROM wyga/php-ext-pdo_mysql:8.0
 FROM wyga/php-ext-gd:8.0
 FROM wyga/php-ext-mcrypt:8.0
 FROM wyga/php-ext-intl:8.0
-FROM wyga/merge:5 AS merge
 
+FROM wyga/merge:5 AS merge
 FROM wyga/php-merge:8.0-fpm
+```
+
+try:
+```
+docker build -t wyga-php-8.0:wyga --pull -f Dockerfile.merge.8.0 \
+ "https://github.com/rjsocha/wyga-php.git#master:examples"
 ```
 
 Other usage example:
