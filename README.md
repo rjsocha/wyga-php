@@ -2,6 +2,8 @@
 
 Precompiled PHP extensions for Docker image crearation.
 
+[See time & size comparison](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison)
+
 ## Quick Start
 
 PHP 7.4 (ONBUILD mode)
