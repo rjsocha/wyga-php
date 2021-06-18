@@ -1,4 +1,4 @@
-# PoC/alpha stage `wyga` PHP modular system
+# [`wyga`](https://github.com/rjsocha/wyga-php/wiki) PHP modular system 
 
 Precompiled PHP extensions for Docker image crearation.
 
