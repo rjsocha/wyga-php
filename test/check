@@ -1,0 +1,55 @@
+#!/bin/bash
+ME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+cd "$ME"
+
+if [[ -z $1 ]]
+then
+	echo "$0 <version>"
+	exit 1
+fi
+WYGA_VERSION=$1
+export WYGA_VERSION
+echo "Checks for: $WYGA_VERSION"
+
+shift
+_skip=0
+SKIPDIR=".skip/$WYGA_VERSION"
+if [[ "$1" == "skip" ]]
+then
+       	_skip=1
+	[[ -d $SKIPDIR ]] || mkdir -p $SKIPDIR
+else
+	[[ -d $SKIPDIR ]] && find $SKIPDIR -type f -delete
+fi
+
+:>check.log
+ok=0
+failed=0
+for _check in $(find tests -mindepth 1 -maxdepth 1 -type f -name "*.check" | sort -n)
+do
+	_check=$(basename "${_check}" .check)
+	if [[ $_skip -eq 0 ]] || [[ ! -f $SKIPDIR/$_check ]]
+	then
+       		echo $_check >>check.log 2>&1
+		printf "%-30s: " "${_check}"
+		echo "CHECK: ${_check}" >>check.log 2>&1
+		cd "tests/"
+		"./${_check}.check" "${_check}" >>../check.log 2>&1
+		_rc=$?
+		cd ..
+		if [[ $_rc -eq 0 ]]
+		then
+			printf "OK\n"
+			printf "\nRC: OK\n" >>check.log
+			((ok++))
+			[[ $_skip -eq 1 ]] && touch "$SKIPDIR/${_check}"
+		else
+			printf "FAIL\n"
+			printf "\nRC: FAIL\n" >>check.log
+			((failed++))
+		fi
+	else
+		echo "$_check: SKIP" >>check.log 2>&1
+	fi
+done
+printf "Checks: %d OK, %d FAILED\n", "$ok" "$failed"

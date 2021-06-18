@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eu
+set -x
+me=$1
+trap _error ERR
+
+_error() {
+	docker image rm wyga-test-$me
+	exit 1
+}
+
+docker build -t wyga-test-$me --no-cache --build-arg V=$WYGA_VERSION -f $me.Dockerfile empty | tee -a /dev/stderr | fgrep 'Extension imagick conflicts with gmagick'
+docker image rm wyga-test-$me || true

@@ -51,10 +51,45 @@ local _ext
   done
 }
 
+_check_conflict() {
+local _ext
+  for _ext in $(_list_ext)
+  do
+      if [[ -f ${WYGA}/${_ext}/conflict ]]
+      then
+          for _conflict in $(<${WYGA}/${_ext}/conflict)
+          do
+	    echo "Checking confilicsts for ${_ext}: $_conflict"
+            if [[ -d ${WYGA}/${_conflict} ]]
+            then
+	      echo -e "\nExtension ${_ext} conflicts with ${_conflict}"
+              echo -e "\nUnable to contiune... aborting\n"
+              exit 100
+            fi
+          done
+      fi
+  done
+}
+
+_expand_ext() {
+local _ext
+  for _ext in $@
+  do
+    if [[ -f ${WYGA}/${_ext}/module ]]
+    then
+      echo $(<${WYGA}/${_ext}/module)
+    else
+      echo "${_ext}"
+    fi
+  done | sort | xargs echo
+}
+
 if [[ -d ${WYGA} ]]
 then
   # check require
   _check_require
+  # check conflicts
+  _check_conflict
   # install deps
   _deps=$(_list_deps)
   if [[ -n ${_deps} ]]
@@ -79,10 +114,11 @@ then
     _ext=$(_list_ext)
     if [[ -n ${_ext} ]]
     then
+      _ext=$(_expand_ext ${_ext})
       echo "extensions: ${_ext}"
       docker-php-ext-enable ${_ext}
       # activte
-      for _act in $_ext
+      for _act in $(_list_ext)
       do
         if [[ -x ${WYGA}/${_act}/activate ]]
         then

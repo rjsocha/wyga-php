@@ -15,7 +15,9 @@
 #define ARG_INFO "-i"
 
 #define WYGA "/wyga/php/ext"
-#define MODULE "/module.dep"
+#define MODULE_DEP "/module.dep"
+#define MODULE "/module"
+#define CONFLICT "/conflict"
 #define VERSION "/version"
 #define REQUIRE "/require"
 
@@ -93,12 +95,16 @@ char fn[256];
     }
     if(info && find_first_dir(WYGA,ext,sizeof ext) == 0) {
         printf("ext: %s\n",ext);
+        snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,MODULE);
+        showfile(fn,"module: ","\n");
         snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,VERSION);
         showfile(fn,"version: ","\n");
         snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,REQUIRE);
         showfile(fn,"require: ","\n");
+        snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,CONFLICT);
+        showfile(fn,"conflict: ","\n");
         if(a_deps) {
-            snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,MODULE);
+            snprintf(fn,sizeof fn,"%s/%s/%s",WYGA,ext,MODULE_DEP);
             showfile(fn,"deps: ","\n");
 	}
     }

@@ -6,9 +6,21 @@ _exclude_so="opcache|sodium"
 _base=$1
 if [[ -z ${_base} ]]
 then
-	        echo "usage: $0 <module>"
-		        exit 1
+        echo "usage: $0 <module>"
+        exit 1
 fi
+
+if [[ ${_base} =~ : ]]
+then
+	_wyga=${_base##*:}
+	_base=${_base%%:*}
+else
+	_wyga=${_base}
+fi
+
+echo "BASE: ${_base}"
+echo "WYGA: ${_wyga}"
+
 _so="${_ext}/${_base}.so"
 if [[ ! -f ${_so} ]]
 then
@@ -18,29 +30,37 @@ fi
 
 mkdir -p "/dist${_ext}"
 
-echo cp "${_so}" "/dist${_ext}/"
 cp "${_so}" "/dist/${_ext}/"
 
-mkdir -p "/dist/wyga/php/ext/${_base}"
-echo -n "${WYGA_VERSION}" > "/dist/wyga/php/ext/${_base}/version"
+mkdir -p "/dist/wyga/php/ext/${_wyga}"
+echo -n "${WYGA_VERSION}" > "/dist/wyga/php/ext/${_wyga}/version"
+if [[ ${_wyga} != ${_base} ]]
+then
+	echo -n "${_base}" > "/dist/wyga/php/ext/${_wyga}/module"
+fi
 echo -e "\n\n"
 if ldd "${_so}"  | fgrep '=>' | awk '{print $3}' | xargs -l1 dpkg -S | awk -F: '{print $1}' | sort | uniq | egrep -v "${_exclude_libs}"
 then
 	echo -e "\n\n"
-	ldd "${_so}"  | fgrep '=>' | awk '{print $3}' | xargs -l1 dpkg -S | awk -F: '{print $1}' | sort | uniq | egrep -v "${_exclude_libs}" >"/dist/wyga/php/ext/${_base}/module.dep"
+	ldd "${_so}"  | fgrep '=>' | awk '{print $3}' | xargs -l1 dpkg -S | awk -F: '{print $1}' | sort | uniq | egrep -v "${_exclude_libs}" >"/dist/wyga/php/ext/${_wyga}/module.dep"
 fi
 
-if [[ -f /require/${_base} ]]
+if [[ -f /require/${_wyga} ]]
 then
-	echo -e "\n#######  Adding /require for ${_base}\n"
-	cat "/require/${_base}"
-	cp "/require/${_base}" "/dist/wyga/php/ext/${_base}/require"
+	echo -e "\n#######  Adding /require for ${_wyga}\n"
+	cp "/require/${_wyga}" "/dist/wyga/php/ext/${_wyga}/require"
 fi
 
-if [[ -f /activate/${_base} ]]
+if [[ -f /activate/${_wyga} ]]
 then
-	echo -e "\n#######  Adding /acivate for ${_base}\n"
-	cp "/activate/${_base}" "/dist/wyga/php/ext/${_base}/activate"
-	chmod +x "/dist/wyga/php/ext/${_base}/activate"
+	echo -e "\n#######  Adding /acivate for ${_wyga}\n"
+	cp "/activate/${_wyga}" "/dist/wyga/php/ext/${_wyga}/activate"
+	chmod +x "/dist/wyga/php/ext/${_wyga}/activate"
+fi
+
+if [[ -f /conflict/${_wyga} ]]
+then
+	echo -e "\n#######  Adding /conflict for ${_wyga}\n"
+	cp "/conflict/${_wyga}" "/dist/wyga/php/ext/${_wyga}/conflict"
 fi
 exit 0

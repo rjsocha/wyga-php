@@ -11,3 +11,6 @@ ENV WYGA_VERSION=${WYGA_VERSION}
 
 CMD ["php", "-a"]
 ENTRYPOINT ["docker-php-entrypoint-cli"]
+LABEL org.opencontainers.image.vendor="wyga"
+LABEL org.opencontainers.image.url="https://github.com/rjsocha/wyga-php"
+LABEL org.opencontainers.image.documentation="https://github.com/rjsocha/wyga-php/wiki"

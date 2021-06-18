@@ -2,3 +2,6 @@ ARG WYGA_VERSION
 FROM wyga/php:${WYGA_VERSION}
 ONBUILD COPY --from=merge / /
 ONBUILD RUN wyga-php-setup
+LABEL org.opencontainers.image.vendor="wyga"
+LABEL org.opencontainers.image.url="https://github.com/rjsocha/wyga-php"
+LABEL org.opencontainers.image.documentation="https://github.com/rjsocha/wyga-php/wiki"

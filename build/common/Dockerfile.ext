@@ -45,9 +45,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
 	pspell \
 	odbc \
 	pdo_odbc
-
-RUN install-php-extensions \
-        igbinary
 COPY / /
 RUN chmod +x /usr/bin/_php-ext-package /usr/bin/_php-ext-list
 ENV WYGA_VERSION=${WYGA_VERSION}

@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eu
+set -x
+me=$1
+trap _error ERR
+
+_error() {
+	docker image rm wyga-test-$me
+	exit 1
+}
+
+docker build --no-cache -t wyga-test-$me --build-arg V=$WYGA_VERSION -f $me.Dockerfile1 empty 2>&1 | tee -a /dev/stderr | fgrep "Extension redis-igbinary conflicts with redis"
+docker image rm wyga-test-$me || true

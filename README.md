@@ -4,9 +4,7 @@ Precompiled PHP extensions for Docker image crearation.
 
 ## Quick Start
 
-With ONBUILD support
-
-PHP 7.4
+PHP 7.4 (ONBUILD mode)
 ```
 FROM wyga/php-ext-mysqli:7.4
 FROM wyga/php-ext-pdo_mysql:7.4
@@ -24,7 +22,7 @@ docker build -t wyga-php-7.4:wyga --pull -f Dockerfile.merge.7.4 \
  "https://github.com/rjsocha/wyga-php.git#master:examples"
 ```
 
-PHP 8.0
+PHP 8.0 (ONBUILD mode)
 ```
 FROM wyga/php-ext-mysqli:8.0
 FROM wyga/php-ext-pdo_mysql:8.0
@@ -55,7 +53,6 @@ COPY --from=merge / /
 RUN wyga-php-setup
 ```
 
-
 Verbose example:
 ```
 FROM wyga/php-ext-mysqli:7.4 AS mysqli
@@ -75,7 +72,7 @@ FROM wyga/php:7.4-fpm
 COPY --from=merge / /
 RUN wyga-php-setup
 ```
-## Merge mode usage
+## Merge/ONBUILD mode usage 
 
 First import your extensions:
 
@@ -121,6 +118,8 @@ AMD64 only for the moment, based on buster (Debian 10 images).\
  * `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20` `7.4` `7`
  * `7.4.20-cli` `7.4-cli` `7-cli`
 
+ For upstream [PHP](https://hub.docker.com/_/php) version add `-upstream` to the tag.
+
 ## Availible extenstions
 
 ### Images
@@ -144,6 +143,7 @@ AMD64 only for the moment, based on buster (Debian 10 images).\
  * `wyga/php-ext-mcrypt`
  * `wyga/php-ext-memcache`
  * `wyga/php-ext-memcached`
+ * `wyga/php-ext-memcached-igbinary`
  * `wyga/php-ext-mongodb`
  * `wyga/php-ext-mysqli`
  * `wyga/php-ext-odbc`
@@ -154,6 +154,7 @@ AMD64 only for the moment, based on buster (Debian 10 images).\
  * `wyga/php-ext-pgsql`
  * `wyga/php-ext-pspell`
  * `wyga/php-ext-redis`
+ * `wyga/php-ext-redis-igbinary`
  * `wyga/php-ext-shmop`
  * `wyga/php-ext-snmp`
  * `wyga/php-ext-soap`

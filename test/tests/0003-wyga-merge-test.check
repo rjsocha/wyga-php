@@ -9,6 +9,6 @@ _error() {
 	exit 1
 }
 
-docker build -t wyga-test-$me --build-arg V=$WYGA_VERSION -f $me.Dockerfile $me
+docker build -t wyga-test-$me --no-cache --build-arg V=$WYGA_VERSION -f $me.Dockerfile $me
 docker run --rm wyga-test-$me php /check/check1.php
 docker image rm wyga-test-$me

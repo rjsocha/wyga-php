@@ -1,0 +1,5 @@
+ARG V
+FROM wyga/php-ext-memcached-igbinary:${V}
+FROM wyga/merge:1 AS merge
+ARG V
+FROM wyga/php-merge:$V

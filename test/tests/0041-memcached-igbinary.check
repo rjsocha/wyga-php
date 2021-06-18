@@ -1,0 +1,16 @@
+#!/bin/bash
+set -eu
+set -x
+me=$1
+trap _error ERR
+
+_error() {
+	docker image rm wyga-test-$me
+	exit 1
+}
+
+docker build --no-cache -t wyga-test-$me --build-arg V=$WYGA_VERSION -f $me.Dockerfile1 empty 2>&1 | tee -a /dev/stderr | fgrep "Checking required extension igbinary (memcached-igbinary): MISSING"
+docker image rm wyga-test-$me || true
+docker build --no-cache -t wyga-test-$me --build-arg V=$WYGA_VERSION -f $me.Dockerfile2 $me
+docker run --rm wyga-test-$me php /check/check1.php
+docker image rm wyga-test-$me 

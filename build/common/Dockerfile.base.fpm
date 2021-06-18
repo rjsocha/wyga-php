@@ -13,3 +13,6 @@ STOPSIGNAL SIGQUIT
 EXPOSE 9000
 CMD ["php-fpm"]
 ENTRYPOINT ["docker-php-entrypoint"]
+LABEL org.opencontainers.image.vendor="wyga"
+LABEL org.opencontainers.image.url="https://github.com/rjsocha/wyga-php"
+LABEL org.opencontainers.image.documentation="https://github.com/rjsocha/wyga-php/wiki"

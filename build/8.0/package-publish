@@ -9,8 +9,10 @@ fi
 
 docker push "${REGISTRY}:${BASE}"
 docker push "${REGISTRY}-merge:${BASE}"
+docker push "${REGISTRY}-merge:${BASE}-upstream"
 docker push "${REGISTRY}:${BASE}-cli"
 docker push "${REGISTRY}-merge:${BASE}-cli"
+docker push "${REGISTRY}-merge:${BASE}-cli-upstream"
 
 for _mod in ${EXTENSIONS}
 do
@@ -22,15 +24,26 @@ for _tag in ${BASE_FPM_TAG_AS}
 do
 	docker push "${REGISTRY}:${_tag}"
 	docker push "${REGISTRY}-merge:${_tag}"
+	docker push "${REGISTRY}-merge:${_tag}-upstream"
 done
 
 for _tag in ${BASE_CLI_TAG_AS}
 do
 	docker push "${REGISTRY}:${_tag}"
 	docker push "${REGISTRY}-merge:${_tag}"
+	docker push "${REGISTRY}-merge:${_tag}-upstream"
 done
 
 for _mod in ${EXTENSIONS}
+do
+	EREGISTRY="${REGISTRY}-ext-${_mod}"
+	for _tag in ${EXTENSION_TAG_AS}
+	do
+		docker push "${EREGISTRY}:${_tag}"
+	done
+done
+
+for _mod in ${EXTENSIONS_CUSTOM}
 do
 	EREGISTRY="${REGISTRY}-ext-${_mod}"
 	for _tag in ${EXTENSION_TAG_AS}

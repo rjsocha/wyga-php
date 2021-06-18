@@ -1,0 +1,7 @@
+ARG V
+FROM wyga/php-ext-igbinary:${V}
+FROM wyga/php-ext-redis-igbinary:${V}
+FROM wyga/merge:2 AS merge
+ARG V
+FROM wyga/php-merge:$V
+COPY / /check/

@@ -1,0 +1,4 @@
+#!/bin/bash
+ME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+cd "$ME"
+./check 8.0.7 skip
