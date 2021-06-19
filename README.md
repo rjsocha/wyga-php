@@ -1,10 +1,15 @@
-# [`wyga`](https://github.com/rjsocha/wyga-php/wiki) PHP modular system 
+# [`wyga`](https://github.com/rjsocha/wyga-php/wiki)Precompiled PHP extensions for Docker's image creation
 
-Precompiled PHP extensions for Docker image crearation.
+## Why?
 
-[See time & size comparison](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison)
+ * [Fast build](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) - save time (3 times faster than upsteam).
+ * [Smaller image size](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) (up to 50%  in size reduction).
+ * [ONBUILD support](https://github.com/rjsocha/wyga-php/wiki/upstream) (neat syntax for Dockerfiles).
+ * Binary distribution.
+ * X86_64 only for the moment, based on buster (Debian 10 images).
+ * [Fully compatible with upstream PHP images.](https://github.com/rjsocha/wyga-php/wiki/upstream)
 
-## Quick Start
+## Getting started
 
 PHP 7.4 (ONBUILD mode)
 ```
@@ -102,10 +107,6 @@ FROM wyga/php-merge:7.4
 
 And build your image.
 
-## Binary distribution
-
-AMD64 only for the moment, based on buster (Debian 10 images).\
-[Works with upstream PHP images.](https://hub.docker.com/_/php)
 
 ## Base image
 
