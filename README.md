@@ -2,9 +2,10 @@
 
 ## Why?
 
- * [Fast build](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) - save time (3 times faster than upsteam).
+ * [Fast build](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) - save your time (3 times faster build time than upstream).
  * [Smaller image size](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) (up to 50%  in size reduction).
  * [Merge (ONBUILD) support](https://github.com/rjsocha/wyga-php/wiki/merge-mode) (neat syntax for Dockerfiles).
+ * [Dependency support.](https://github.com/rjsocha/wyga-php/wiki/dependency-support)
  * Compact (minimal number of layers).
  * Binary distribution.
  * X86_64 only for the moment, based on buster (Debian 10 images).
@@ -81,10 +82,10 @@ COPY --from=merge / /
 RUN wyga-php-setup
 ```
 
-## Base image
+## Base images
 
  * `wyga/php`
- * `wyga/php-merge`
+ * [wyga/php-merge](https://github.com/rjsocha/wyga-php/wiki/merge-mode)
 
 ### Tags
 
