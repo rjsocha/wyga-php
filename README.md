@@ -1,4 +1,9 @@
 # [`wyga`](https://github.com/rjsocha/wyga-php/wiki)Precompiled PHP extensions for Docker's image creation
+## Build time comparison
+
+![chart](https://github.com/rjsocha/wyga-php/raw/master/asset/wyga-vs-upstream.png)
+
+Time in seconds
 
 ## Why?
 
