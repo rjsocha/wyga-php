@@ -1,0 +1,5 @@
+#!/bin/bash
+for image in wyga/php wyga/php-merge wyga/php-ext-bcmath wyga/php-ext-bz2 wyga/php-ext-calendar wyga/php-ext-dba wyga/php-ext-exif wyga/php-ext-gd wyga/php-ext-gearman wyga/php-ext-gettext wyga/php-ext-gmagick wyga/php-ext-gmp wyga/php-ext-igbinary wyga/php-ext-imagick wyga/php-ext-imap wyga/php-ext-intl wyga/php-ext-ldap wyga/php-ext-mailparse wyga/php-ext-mcrypt wyga/php-ext-memcache wyga/php-ext-memcached wyga/php-ext-memcached-igbinary wyga/php-ext-mongodb wyga/php-ext-mysqli wyga/php-ext-odbc  wyga/php-ext-pcntl wyga/php-ext-pdo_mysql wyga/php-ext-pdo_odbc  wyga/php-ext-pdo_pgsql wyga/php-ext-pgsql wyga/php-ext-pspell wyga/php-ext-redis  wyga/php-ext-redis-igbinary  wyga/php-ext-shmop wyga/php-ext-snmp  wyga/php-ext-soap wyga/php-ext-sockets wyga/php-ext-sysvmsg  wyga/php-ext-sysvsem wyga/php-ext-sysvshm wyga/php-ext-uuid wyga/php-ext-xdebug wyga/php-ext-xmlrpc  wyga/php-ext-xsl wyga/php-ext-yaml wyga/php-ext-zip wyga/php-ext-v8js
+do
+	docker pull -a ${image}
+done
