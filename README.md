@@ -3,7 +3,7 @@
 
 ![chart](https://github.com/rjsocha/wyga-php/raw/master/asset/wyga-vs-upstream.png)
 
-Time in seconds
+Image build time in seconds.
 
 ## Why?
 
