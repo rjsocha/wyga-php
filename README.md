@@ -4,7 +4,7 @@
 
  * [Fast build](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) - save time (3 times faster than upsteam).
  * [Smaller image size](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) (up to 50%  in size reduction).
- * [ONBUILD support](https://github.com/rjsocha/wyga-php/wiki/upstream) (neat syntax for Dockerfiles).
+ * [Merge (ONBUILD) support](https://github.com/rjsocha/wyga-php/wiki/upstream) (neat syntax for Dockerfiles).
  * Binary distribution.
  * X86_64 only for the moment, based on buster (Debian 10 images).
  * [Fully compatible with upstream PHP images.](https://github.com/rjsocha/wyga-php/wiki/upstream)
@@ -79,34 +79,6 @@ FROM wyga/php:7.4-fpm
 COPY --from=merge / /
 RUN wyga-php-setup
 ```
-## Merge/ONBUILD mode usage 
-
-First import your extensions:
-
-```
-FROM wyga/php-ext-intl:7.4
-FROM wyga/php-ext-imap:7.4
-FROM wyga/php-ext-mcrypt:7.4
-FROM wyga/php-ext-memcached:7.4
-FROM wyga/php-ext-pgsql:7.4
-FROM wyga/php-ext-zip:7.4
-```
-
-Count number of FROM's. In this example we have 6. Merge previous imports with `wyga/merge`.\
-Put `6` as a tag (number of previous imports) and put `merge` as stage name (**important!**).
-
-```
-FROM wyga/merge:6 AS merge
-```
-
-Lastly add `wyga/php-merge`
-
-```
-FROM wyga/php-merge:7.4
-```
-
-And build your image.
-
 
 ## Base image
 
