@@ -1,4 +1,5 @@
-# [`wyga`](https://github.com/rjsocha/wyga-php/wiki)Precompiled PHP extensions for Docker's image creation
+# [`wyga`](https://github.com/rjsocha/wyga-php/wiki) Fast build system for PHP Docker's images.
+
 ## Build time comparison
 
 ![chart](https://github.com/rjsocha/wyga-php/raw/master/asset/wyga-vs-upstream.png)
