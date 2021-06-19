@@ -2,7 +2,7 @@
 
 ## Why?
 
- * [Fast build](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) - save your time (3 times faster build time than upstream).
+ * [Fast build](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) - save your time (at least 3 times faster build time than upstream version).
  * [Smaller image size](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) (up to 50%  in size reduction).
  * [Merge (ONBUILD) support](https://github.com/rjsocha/wyga-php/wiki/merge-mode) (neat syntax for Dockerfiles).
  * [Dependency support.](https://github.com/rjsocha/wyga-php/wiki/dependency-support)
