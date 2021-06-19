@@ -1,0 +1,30 @@
+FROM wyga/php-ext-gd:8.0
+FROM wyga/php-ext-zip:8.0
+FROM wyga/php-ext-pcntl:8.0
+FROM wyga/php-ext-mysqli:8.0
+FROM wyga/php-ext-mongodb:8.0
+FROM wyga/php-ext-mcrypt:8.0
+FROM wyga/php-ext-intl:8.0
+FROM wyga/php-ext-gmp:8.0
+FROM wyga/php-ext-gettext:8.0
+FROM wyga/php-ext-bz2:8.0
+FROM wyga/php-ext-calendar:8.0
+FROM wyga/php-ext-bcmath:8.0
+FROM wyga/php-ext-exif:8.0
+FROM wyga/php-ext-memcached:8.0
+FROM wyga/php-ext-pdo_mysql:8.0
+FROM wyga/php-ext-redis:8.0
+FROM wyga/php-ext-uuid:8.0
+FROM wyga/php-ext-xmlrpc:8.0
+FROM wyga/php-ext-xsl:8.0
+FROM wyga/php-ext-yaml:8.0
+FROM wyga/php-ext-dba:8.0
+FROM wyga/php-ext-imagick:8.0
+FROM wyga/php-ext-sysvmsg:8.0
+FROM wyga/php-ext-sysvsem:8.0
+FROM wyga/php-ext-sysvshm:8.0
+FROM wyga/php-ext-xdebug:8.0
+FROM wyga/php-ext-sockets:8.0
+
+FROM wyga/merge:27 as merge
+FROM wyga/php-merge:8.0
