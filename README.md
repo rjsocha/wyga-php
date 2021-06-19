@@ -4,7 +4,7 @@
 
  * [Fast build](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) - save time (3 times faster than upsteam).
  * [Smaller image size](https://github.com/rjsocha/wyga-php/wiki/time-size-comparison) (up to 50%  in size reduction).
- * [Merge (ONBUILD) support](https://github.com/rjsocha/wyga-php/wiki/upstream) (neat syntax for Dockerfiles).
+ * [Merge (ONBUILD) support](https://github.com/rjsocha/wyga-php/wiki/merge-mode) (neat syntax for Dockerfiles).
  * Binary distribution.
  * X86_64 only for the moment, based on buster (Debian 10 images).
  * [Fully compatible with upstream PHP images.](https://github.com/rjsocha/wyga-php/wiki/upstream)
