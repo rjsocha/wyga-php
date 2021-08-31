@@ -95,11 +95,11 @@ RUN wyga-php-setup
 
 ### Tags
 
- * `8.0.7-fpm` `8.0-fpm` `8-fpm` `8.0.7` `8.0` `8`
- * `8.0.7-cli` `8.0-cli` `8-cli`
+ * `8.0.10-fpm` `8.0-fpm` `8-fpm` `8.0.10` `8.0` `8`
+ * `8.0.10-cli` `8.0-cli` `8-cli`
 
- * `7.4.20-fpm` `7.4-fpm` `7-fpm` `7.4.20` `7.4` `7`
- * `7.4.20-cli` `7.4-cli` `7-cli`
+ * `7.4.23-fpm` `7.4-fpm` `7-fpm` `7.4.23` `7.4` `7`
+ * `7.4.23-cli` `7.4-cli` `7-cli`
 
  For upstream [PHP](https://hub.docker.com/_/php) version add `-upstream` to the tag.
 
@@ -154,8 +154,8 @@ RUN wyga-php-setup
 
 ### Tags
 
- * `7.4.20` `7.4` `7`
- * `8.0.7` `8.0` `8`
+ * `7.4.23` `7.4` `7`
+ * `8.0.10` `8.0` `8`
 
 #### Extra extensions
 
@@ -163,14 +163,14 @@ RUN wyga-php-setup
 
 #### Tags
 
- * `7.4.20` `7.4` `7`
+ * `7.4.23` `7.4` `7`
 
 ## Build comparsion:
 
 ### Standard (cold cache / no local images) build:
 
 ```
-FROM php:7.4.20-fpm-buster
+FROM php:7.4.23-fpm-buster
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
  /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
@@ -195,7 +195,7 @@ docker build --no-cache -t wyga-php-7.4-fpm:build \
 Build time: 3m 4s\
 Image size: 467MB
 
-Second run (with local php:7.4.20-fpm-buster image)
+Second run (with local php:7.4.23-fpm-buster image)
 
 Build time: 2m 48s\
 Image size: 467MB
@@ -203,7 +203,7 @@ Image size: 467MB
 ### wyga build (without cache / no local images, wyga/php):
 
 ```
-ARG V=7.4.20
+ARG V=7.4.23
 FROM wyga/php-ext-igbinary:${V} AS igbinary
 FROM wyga/php-ext-yaml:${V} AS yaml
 FROM wyga/php-ext-imagick:${V} AS imagick
@@ -249,7 +249,7 @@ Image size: 247MB
 wyga modules are fully compatibile with upstrem images
 
 ```
-ARG V=7.4.20
+ARG V=7.4.23
 FROM wyga/php-ext-igbinary:${V} AS igbinary
 FROM wyga/php-ext-yaml:${V} AS yaml
 FROM wyga/php-ext-imagick:${V} AS imagick
