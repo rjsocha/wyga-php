@@ -5,8 +5,12 @@ all:
 	./build base-merge
 	./build ext
 	./build ext:igbinary
+	./build ext:gmagick
+	./build ext:luasandbox
 	./build package
 	./build package:igbinary
+	./build package:gmagick
+	./build package:luasandbox
 publish:
 	./build publish
 

@@ -1,0 +1,12 @@
+BUILD_BASE=7.4
+REGISTRY="wyga/php"
+BASE="${WYGA_VERSION}"
+BASE_FPM_TAG_AS="${WYGA_VERSION}-fpm 7.4-fpm 7-fpm 7.4 7"
+BASE_CLI_TAG_AS="7.4-cli 7-cli"
+EXTENSION_TAG_AS="${WYGA_VERSION} 7.4 7"
+LOCAL_BUILD_BASE="wyga-php-base-build:$BASE"
+LOCAL_BUILD_EXT="wyga-php-ext-build:$BASE"
+EXTENSION_TAG_AS="${WYGA_VERSION} 7.4 7"
+EXTENSIONS="intl imap xmlrpc snmp exif gettext gd gmp mcrypt shmop dba pdo_mysql sockets uuid soap xsl ldap bcmath calendar xdebug mysqli redis sysvshm pcntl mongodb zip sysvmsg bz2 sysvsem memcached memcache yaml imagick gearman mailparse pgsql pdo_pgsql pspell odbc pdo_odbc"
+EXTENSIONS_CUSTOM="v8js igbinary memcached-igbinary redis-igbinary gmagick"
+DOCKER_BUILD_EXTRA="--pull --no-cache"

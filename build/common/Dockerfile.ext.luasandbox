@@ -1,0 +1,10 @@
+ARG WYGA_VERSION
+FROM php:${WYGA_VERSION}-fpm-buster AS base
+ARG WYGA_VERSION
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
+  install-php-extensions \
+    luasandbox
+COPY / /
+RUN chmod +x /usr/bin/_php-ext-package /usr/bin/_php-ext-list
+ENV WYGA_VERSION=${WYGA_VERSION}

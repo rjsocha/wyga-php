@@ -26,7 +26,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
         xsl \
         yaml \
         dba \
-        gmagick \
         imagick \
         imap \
         ldap \
@@ -38,13 +37,13 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
         sysvshm \
         xdebug \
         sockets \
-	gearman \
-	mailparse \
-	pgsql \
-	pdo_pgsql \
-	pspell \
-	odbc \
-	pdo_odbc
+	      gearman \
+      	mailparse \
+      	pgsql \
+      	pdo_pgsql \
+      	pspell \
+      	odbc \
+      	pdo_odbc
 COPY / /
 RUN chmod +x /usr/bin/_php-ext-package /usr/bin/_php-ext-list
 ENV WYGA_VERSION=${WYGA_VERSION}
